@@ -8,3 +8,5 @@ class Water:
         self.leak_rate=leak_rate
         self.density=density
         self.resistance=resistance
+
+    def physics(self, ):
