@@ -12,7 +12,9 @@ libaudioverse.initialize()
 server = libaudioverse.Server()
 server.set_output_device("default")
 bgMusic = soundutil.SoundPlayer(server)
+bgAmbience = soundutil.SoundPlayer(server)
 bgmPath = "assets\\waterbending.wav"
+bgaPath = "assets\\underwater.wav"
 display.init()
 x, y = 1000, 800
 screen = display.set_mode((x, y))
@@ -22,6 +24,7 @@ v_graph = Graph(screen)
 keys = set()
 game_over = False
 bgMusic.play(bgmPath, True)
+bgAmbience.play(bgaPath,  True)
 while not game_over:
     elapsed = clock.tick()/1000
     events = event.get()
