@@ -55,6 +55,7 @@ class Listener:
 		self.environment.output_channels = oc
 		self.environment.position = tuple(pos)
 		self.environment.orientation = tuple(o)
+		self.environment.default_size = 100.0
 		self.environment.connect(0, s)
 		self.server = s
 	def move(self, vel):
