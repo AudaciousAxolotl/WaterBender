@@ -4,7 +4,6 @@ from scipy.spatial import Voronoi
 
 from config import MAP_SIZE, GRAPH_MAX_POINTS, GRAPH_RELAXATIONS, POINT_RADIUS
 
-
 class Point:
     def __init__(self, x, y):
         self.x = x

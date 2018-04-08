@@ -2,14 +2,15 @@ from pygame import display, event, time, draw
 import pygame
 
 #from gui import Viewport
-import Geography
+from water import Graph
 
 display.init()
 x, y = 1000, 800
-screen = display.set_mode((1000, 8000))
+screen = display.set_mode((x, y))
 clock = time.Clock()
 
 #viewport = Viewport(transform.scale())
+v_graph = Graph()
 keys = set()
 game_over = False
 while not game_over:
