@@ -1,10 +1,12 @@
-from pygame import display, event, time, draw
+from pygame import display, event, time, draw, transform
 import pygame
 #My import. Don't forget to do pip install libaudioverse, or this file won't run.
 import libaudioverse
 import soundutil
 #end my import
 #from gui import Viewport
+
+from gui import Viewport
 from water import Graph
 libaudioverse.initialize()
 server = libaudioverse.Server()
@@ -16,7 +18,6 @@ x, y = 1000, 800
 screen = display.set_mode((x, y))
 clock = time.Clock()
 
-#viewport = Viewport(transform.scale())
 v_graph = Graph(screen)
 keys = set()
 game_over = False

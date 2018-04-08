@@ -15,7 +15,7 @@ class Point:
     def tuple(self):
         return int(self.x), int(self.y)
 
-    def draw(self, surface, color=(255, 0, 255)):
+    def draw(self, surface, color=(94, 35, 37)):
         draw.circle(surface, color, (int(self.x), int(self.y)), self.radius)
 
 
@@ -69,13 +69,12 @@ class Edge:
         self.end_corner.edges.remove(self)
         edge_set.remove(self)
 
-    def draw_centers_edge(self, surface, color = (255, 0, 0)):
+    def draw_centers_edge(self, surface, color = (94, 35, 37)):
         if self.has_center_edge:
             draw.line(surface, color, self.start_center.location.tuple(), self.end_center.location.tuple(), 1)
 
-    def draw_corners_edge(self, surface, color = (0, 0, 255)):
+    def draw_corners_edge(self, surface, color = (94, 35, 37)):
         draw.line(surface, color, self.start_corner.location.tuple(), self.end_corner.location.tuple(), 1)
-        #circle = draw.circle(surface, color, (500, 500), 30)
 
 
 class Center:
@@ -118,7 +117,7 @@ class Corner:
 
     def infer_out_of_bounds(self):
         if self.location.x < 0 or self.location.y < 0 or \
-                self.location.x > 10000 or self.location.y > 10000:
+                self.location.x > 1000 or self.location.y > 800:
             self.out_of_bounds = True
 
     def delete(self, corner_set):
@@ -136,7 +135,7 @@ class Graph:
     def __init__(self, surf):
         self.MAP_SIZE = 10000
         self.GRAPH_MAX_POINTS = 7500
-        self.surface = Surface((self.MAP_SIZE, self.MAP_SIZE))
+        self.surface = Surface((surf.get_width(), surf.get_height()))
         self.surface.fill((255, 255, 255))
 
         self.centers = {}
@@ -152,7 +151,7 @@ class Graph:
         corners = []
 
         voronoi = Voronoi(np.random.rand(self.GRAPH_MAX_POINTS, 2))
-        for i in range(3):   #GRAPH RELAXATIONS
+        for i in range(15):   #GRAPH RELAXATIONS
             print('Preforming Relaxation #', i + 1, '.', sep = '')
             centroids = []
             for region in voronoi.regions:
@@ -238,7 +237,3 @@ class Graph:
             center.draw(surf)
         for corner in self.corners.values():
             corner.draw(surf)
-        #circle = draw.circle(surf, (255, 0, 255), (500, 500), 30)
-        # self.surface.blit(circle, (0,0), (500, 500,
-        #                                   self.surface.get_width(), self.surface.get_height()))
-        # surf.blit(self.surface, (500, 500))
