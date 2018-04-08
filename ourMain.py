@@ -1,9 +1,16 @@
 from pygame import display, event, time, draw
 import pygame
-
+#My import. Don't forget to do pip install libaudioverse, or this file won't run.
+import libaudioverse
+import soundutil
+#end my import
 #from gui import Viewport
 from water import Graph
-
+libaudioverse.initialize()
+server = libaudioverse.Server()
+server.set_output_device("default")
+bgMusic = soundutil.SoundPlayer(server)
+bgmPath = "assets\\waterbending.wav"
 display.init()
 x, y = 1000, 800
 screen = display.set_mode((x, y))
@@ -13,6 +20,7 @@ clock = time.Clock()
 v_graph = Graph(screen)
 keys = set()
 game_over = False
+bgMusic.play(bgmPath, True)
 while not game_over:
     elapsed = clock.tick()/1000
     events = event.get()
@@ -35,3 +43,4 @@ while not game_over:
     display.flip()
 
 display.quit()
+libaudioverse.shutdown()
