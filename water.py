@@ -20,6 +20,9 @@ class Point:
 
 
 class Edge:
+    """
+    The lines that create the Voronoi's graphs hexigons
+    """
     def __init__(self, index, start_center, end_center, start_corner, end_corner):
         self.index = index
 
@@ -55,6 +58,11 @@ class Edge:
         self.end_corner.centers.add(self.end_center)
 
     def delete(self, edge_set):
+        """
+        removes the edges from the list.
+        :param edge_set:
+        :return: None, just modifies
+        """
         self.start_center.edges.remove(self)
         self.end_center.edges.remove(self)
         self.start_corner.edges.remove(self)
@@ -65,8 +73,9 @@ class Edge:
         if self.has_center_edge:
             draw.line(surface, color, self.start_center.location.tuple(), self.end_center.location.tuple(), 1)
 
-    def draw_corners_edge(self, surface, color = (0, 0, 0)):
+    def draw_corners_edge(self, surface, color = (0, 0, 255)):
         draw.line(surface, color, self.start_corner.location.tuple(), self.end_corner.location.tuple(), 1)
+        #circle = draw.circle(surface, color, (500, 500), 30)
 
 
 class Center:
@@ -87,7 +96,7 @@ class Center:
             edge.has_region_edge = False
         center_set.remove(self)
 
-    def draw(self, surface, color = (0, 0, 0)):
+    def draw(self, surface, color = (0, 255, 0)):
         self.location.draw(surface, color)
 
 
@@ -119,12 +128,12 @@ class Corner:
             corner.corners.remove(self)
         corner_set.remove(self)
 
-    def draw(self, surface, color=(0, 0, 0)):
+    def draw(self, surface, color=(0, 255, 0)):
         self.location.draw(surface, color)
 
 
 class Graph:
-    def __init__(self):
+    def __init__(self, surf):
         self.MAP_SIZE = 10000
         self.GRAPH_MAX_POINTS = 7500
         self.surface = Surface((self.MAP_SIZE, self.MAP_SIZE))
@@ -135,7 +144,7 @@ class Graph:
         self.corners = {}
 
         self.initialize_centers()
-        self.draw()
+        self.draw(surf)
 
     def initialize_centers(self):
         centers = []
@@ -222,10 +231,14 @@ class Graph:
 
         print("Graph Creation Successful!\n")
 
-    def draw(self):
+    def draw(self, surf):
         for edge in self.edges.values():
-            edge.draw_corners_edge(self.surface)
+            edge.draw_corners_edge(surf)
         for center in self.centers.values():
-            center.draw(self.surface)
+            center.draw(surf)
         for corner in self.corners.values():
-            corner.draw(self.surface)
+            corner.draw(surf)
+        #circle = draw.circle(surf, (255, 0, 255), (500, 500), 30)
+        # self.surface.blit(circle, (0,0), (500, 500,
+        #                                   self.surface.get_width(), self.surface.get_height()))
+        # surf.blit(self.surface, (500, 500))
