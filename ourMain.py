@@ -48,5 +48,5 @@ while not game_over:
 
 display.quit()
 libaudioverse.shutdown()
-#print("You win!")
+print("You win!")
 #That's just their in case nothing else gets done, and we feel like being a troll. LOL!!!
